@@ -22,9 +22,6 @@ return new class extends Migration
             $table->text('prompt');
             $table->unsignedBigInteger('winner')->nullable();
             $table->timestamps();
-
-
-            $table->foreign('winner')->references('id')->on('submissions')->onDelete('set null');
         });
     }
 
