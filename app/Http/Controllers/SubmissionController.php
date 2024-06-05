@@ -35,9 +35,6 @@ class SubmissionController extends Controller
             // Store the file and get the path
             $path = $request->file('media')->store('submissions/' .  $challenge->identifier);
 
-            // Debug the stored file path
-            dd('Stored file path: ', $path);
-
 
             // Get the authenticated user
             $user = Auth::user();
