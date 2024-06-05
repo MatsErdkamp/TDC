@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use RahulHaque\Filepond\Facades\Filepond;
 
-
 class SubmissionController extends Controller
 {
     public function store(Request $request)
@@ -34,7 +33,10 @@ class SubmissionController extends Controller
         // Handle the file upload
         if ($request->hasFile('media')) {
             // Store the file and get the path
-            $fileInfo = Filepond::field($request->media)->moveTo('media');
+            $path = $request->file('media')->store('submissions/' .  $challenge->identifier);
+
+            // Debug the stored file path
+            dd('Stored file path: ', $path);
 
 
             // Get the authenticated user
@@ -44,7 +46,9 @@ class SubmissionController extends Controller
             $submission = new Submission();
             $submission->user_id = $user->id;
             $submission->challenge_id = $challenge->id;
-            $submission->media = $fileInfo['location'];
+            $submission->media = $path;
+
+            // Save the submission
             $submission->save();
 
             return redirect('/')->with('message', 'Submission created successfully');

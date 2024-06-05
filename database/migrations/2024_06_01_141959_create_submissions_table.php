@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('challenge_id');
-            $table->string('media'); // Assuming media is stored as a file path
+            $table->string('media');
             $table->timestamps();
 
             // Foreign keys

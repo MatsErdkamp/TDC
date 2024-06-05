@@ -10,9 +10,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 
@@ -45,7 +42,7 @@ class SubmissionResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')->label('User'),
                 Tables\Columns\TextColumn::make('challenge.identifier')->label('Challenge'),
-                Tables\Columns\ImageColumn::make('media')->label('Media'),
+                Tables\Columns\TextColumn::make('media')->label('Media'),
                 Tables\Columns\TextColumn::make('created_at')->date()->label('Submitted At'),
             ])
             ->filters([

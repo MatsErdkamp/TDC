@@ -6,6 +6,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\SubmissionController;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     $today = now()->toDateString();
@@ -27,13 +28,23 @@ Route::get('/', function () {
     ]);
 });
 
+
+Route::get('/submission', function () {
+    return Inertia::render('SubmissionCreator', [
+        'isAuthenticated' => Auth::check(),
+    ]);
+})->name('submission.creator');
+
+
 Route::middleware('auth')->group(function () {
-    Route::post('/submission', [SubmissionController::class, 'store']);
+    Route::post('/submission/create', [SubmissionController::class, 'store'])->name('submission.post');;
 });
+
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
