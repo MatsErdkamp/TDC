@@ -12,7 +12,6 @@ const showingNavigationDropdown = ref(false);
 // Use the usePage hook to get the page props
 const { props } = usePage();
 
-console.log(props);
 </script>
 
 <template>

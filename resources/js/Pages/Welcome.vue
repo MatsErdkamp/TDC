@@ -2,6 +2,7 @@
 import { Head, Link } from "@inertiajs/vue3";
 import { ref } from "vue";
 
+
 const showModal = ref(false);
 
 defineProps({
@@ -25,6 +26,8 @@ const navigateToSubmission = () => {
 </script>
 
 <template>
+  <Head title="Home" />
+
   <div v-if="todaysChallenge" class="bg-white text-black">
     <div class="flex flex-row justify-between">
       <div class="mx-16 flex flex-col justify-between">
