@@ -31,20 +31,17 @@ defineProps({
 <template>
   <Head title="Home" />
 
-  <div v-if="todaysChallenge" class="page-container" >
+  <div v-if="todaysChallenge" class="page-container">
     <div class="flex flex-col justify-between">
       <div class="mx-16">
-        <div class="mt-16">
+        <div class="mt-12">
           <h1 class="text-xl font-bold">
             TodaysDesignChallenge #{{ todaysChallenge.identifier }}
           </h1>
-          <h2 class="prompt ">
+          <h2 class="prompt">
             {{ todaysChallenge.prompt }}
           </h2>
-          <Link
-            :href="route('submission.creator')"
-            class="mt-4 px-4 py-2 bg-black text-white rounded-xl"
-          >
+          <Link :href="route('submission.creator')" class="submit-button">
             Submit Entry • 7 hours left
           </Link>
         </div>
@@ -82,21 +79,29 @@ defineProps({
   </div>
 </template>
 
-
-
 <style scoped>
-
 .page-container {
   background: v-bind(backgroundColor);
   color: v-bind(accentColor);
 }
 
 .prompt {
-  font-family: 'Anton', sans-serif;
+  font-family: "Anton", sans-serif;
   text-transform: uppercase;
   font-size: 8em;
   text-wrap: balance;
   line-height: 1;
+  margin-bottom: 24px;
+  margin-top: 8px;
+}
+
+.submit-button {
+  background: v-bind(accentColor);
+  padding: 16px 32px;
+  border-radius: 48px;
+  color: v-bind(backgroundColor);
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
 .winner-image-container {
