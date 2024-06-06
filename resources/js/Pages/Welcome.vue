@@ -71,7 +71,7 @@ const navigateToSubmission = () => {
       </div>
     </div>
   </div>
-  <div class="grid place-items-center h-screen">
+  <div v-else class="grid place-items-center h-screen">
     no daily challenge found :(
   </div>
 
