@@ -25,7 +25,7 @@ const navigateToSubmission = () => {
 </script>
 
 <template>
-  <div class="bg-white text-black">
+  <div v-if="todaysChallenge" class="bg-white text-black">
     <div class="flex flex-row justify-between">
       <div class="mx-16 flex flex-col justify-between">
         <div class="mt-16">
@@ -68,6 +68,10 @@ const navigateToSubmission = () => {
       </div>
     </div>
   </div>
+  <div class="grid place-items-center h-screen">
+    no daily challenge found :(
+  </div>
+
 </template>
 
 <style scoped>
