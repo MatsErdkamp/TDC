@@ -2,7 +2,6 @@
 import { Head, Link } from "@inertiajs/vue3";
 import { ref } from "vue";
 
-
 const showModal = ref(false);
 
 defineProps({
@@ -18,24 +17,28 @@ defineProps({
   yesterdaysChallenge: {
     type: Object,
   },
+  backgroundColor: {
+    type: String,
+    default: "#a1bdfd",
+  },
+  accentColor: {
+    type: String,
+    default: "#2b54b5",
+  },
 });
-
-const navigateToSubmission = () => {
-  router.visit("/submission/create");
-};
 </script>
 
 <template>
   <Head title="Home" />
 
-  <div v-if="todaysChallenge" class="bg-white text-black">
-    <div class="flex flex-row justify-between">
-      <div class="mx-16 flex flex-col justify-between">
+  <div v-if="todaysChallenge" class="page-container" >
+    <div class="flex flex-col justify-between">
+      <div class="mx-16">
         <div class="mt-16">
           <h1 class="text-xl font-bold">
             TodaysDesignChallenge #{{ todaysChallenge.identifier }}
           </h1>
-          <h2 class="text-6xl font-bold text-balance">
+          <h2 class="prompt ">
             {{ todaysChallenge.prompt }}
           </h2>
           <Link
@@ -46,22 +49,14 @@ const navigateToSubmission = () => {
           </Link>
         </div>
 
-        <div class="mb-16">
+        <div class="mt-16">
           <h2 class="text-xl font-bold">
             Yesterday's Winner #{{ yesterdaysChallenge.identifier }}
           </h2>
-          <h3 class="text-6xl font-bold capitalize">
-            {{ yesterdaysChallenge.winner_submission.user.name }}
-          </h3>
-          <small>{{ yesterdaysChallenge.winner_submission.user.email }}</small>
-          <p class="text-xl font-bold">
-            {{ yesterdaysChallenge.prompt }}
-          </p>
-          <div class="flex justify-center mt-4 space-x-4"></div>
         </div>
       </div>
 
-      <div class="winner-image-container">
+      <div class="winner-image-container mx-16">
         <img
           class="winner-image"
           :src="'storage/' + yesterdaysChallenge.winner_submission.media"
@@ -69,28 +64,49 @@ const navigateToSubmission = () => {
           srcset=""
         />
       </div>
+
+      <div class="mx-16 my-16">
+        <h3 class="text-6xl font-bold capitalize">
+          {{ yesterdaysChallenge.winner_submission.user.name }}
+        </h3>
+        <small>{{ yesterdaysChallenge.winner_submission.user.email }}</small>
+        <p class="text-xl font-bold">
+          {{ yesterdaysChallenge.prompt }}
+        </p>
+        <div class="flex justify-center mt-4 space-x-4"></div>
+      </div>
     </div>
   </div>
   <div v-else class="grid place-items-center h-screen">
     no daily challenge found :(
   </div>
-
 </template>
 
+
+
 <style scoped>
+
+.page-container {
+  background: v-bind(backgroundColor);
+  color: v-bind(accentColor);
+}
+
+.prompt {
+  font-family: 'Anton', sans-serif;
+  text-transform: uppercase;
+  font-size: 8em;
+  text-wrap: balance;
+  line-height: 1;
+}
+
 .winner-image-container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  flex: 1;
-  height: 100vh;
-  width: 70vw;
-  padding: 8px;
+  max-width: 100%;
+  position: relative;
 }
 
 .winner-image {
-  max-height: 100%;
-  border-radius: 8px;
+  min-width: 100%;
+  border-radius: 24px;
 }
 
 h2 {
