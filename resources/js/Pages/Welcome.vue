@@ -4,7 +4,7 @@ import { ref } from "vue";
 
 const showModal = ref(false);
 
-defineProps({
+const props = defineProps({
   canLogin: {
     type: Boolean,
   },
@@ -26,6 +26,8 @@ defineProps({
     default: "#2b54b5",
   },
 });
+
+document.body.style.backgroundColor = props.backgroundColor;
 </script>
 
 <template>
@@ -74,7 +76,7 @@ defineProps({
       </div>
     </div>
   </div>
-  <div v-else class="grid place-items-center h-screen">
+  <div v-else class="grid place-items-center h-screen no-challenge">
     no daily challenge found :(
   </div>
 </template>
@@ -83,6 +85,13 @@ defineProps({
 .page-container {
   background: v-bind(backgroundColor);
   color: v-bind(accentColor);
+}
+
+.no-challenge {
+  font-family: "Anton", sans-serif;
+  text-transform: uppercase;
+  color: v-bind(accentColor);
+  font-size: 2em;
 }
 
 .prompt {
