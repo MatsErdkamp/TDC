@@ -17,17 +17,11 @@ const props = defineProps({
   yesterdaysChallenge: {
     type: Object,
   },
-  backgroundColor: {
-    type: String,
-    default: "#a1bdfd",
-  },
   accentColor: {
     type: String,
     default: "#2b54b5",
   },
 });
-
-document.body.style.backgroundColor = props.backgroundColor;
 </script>
 
 <template>
@@ -76,15 +70,18 @@ document.body.style.backgroundColor = props.backgroundColor;
       </div>
     </div>
   </div>
-  <div v-else class="grid place-items-center h-screen no-challenge">
+  <div
+    v-else
+    class="grid place-items-center h-screen page-container no-challenge"
+  >
     no daily challenge found :(
   </div>
 </template>
 
 <style scoped>
 .page-container {
-  background: v-bind(backgroundColor);
   color: v-bind(accentColor);
+  background: oklch(from v-bind(accentColor) calc(l + 0.4) c h);
 }
 
 .no-challenge {
@@ -92,6 +89,7 @@ document.body.style.backgroundColor = props.backgroundColor;
   text-transform: uppercase;
   color: v-bind(accentColor);
   font-size: 2em;
+  background: oklch(from v-bind(accentColor) calc(l + 0.4) c h);
 }
 
 .prompt {
